@@ -1,7 +1,7 @@
 {
   "name": "trello-power-up-skeleton",
   "version": "0.0.1",
-  "description": "A Power-Up skeleton to remix to start building your Power-Up!",
+  "description": "A Trello Power-Up that link task cards to growth plan!",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
