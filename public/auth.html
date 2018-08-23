@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://trello.com/power-ups/power-up.css">
+    <script src="https://trello.com/power-ups/power-up.min.js"></script>
+  </head>
+  <body>
+    <button id="auth-btn" type="submit" class="mod-primary">Authorize Boardwalk to Access Trello</button>
+    <script>
+      var Promise = TrelloPowerUp.Promise;
+      var t = TrelloPowerUp.iframe();
+      
+      var trelloAuthUrl
+    
+      var tokenLooksValid = function(token) {
+        return /^[0-9a-f]{64}$/.test(token);
+      }
+
+      document.getElementById('auth-btn').addEventListener('click', function(){
+        t.authorize(trelloAuthUrl, { height: 680, width: 580, validToken: tokenLooksValid })
+        .then(function(token){
+          // store the token in Trello private Power-Up storage
+          return t.set('member', 'private', 'token', token)
+        });
+      });
+    </script>
+  </body>
+</html>
