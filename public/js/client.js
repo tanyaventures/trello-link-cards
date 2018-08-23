@@ -4,10 +4,10 @@ var Promise = TrelloPowerUp.Promise;
 
 // TODO: replace icons to our brand icons
 var BLACK_ROCKET_ICON = 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421';
-var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
-var BLACK_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-black.svg';
-var GRAY_ICON = '';
-var CAPABILITY_ICON = '';
+var WHITE_ICON = 'https://cdn.glitch.com/b4e956a2-3002-4a55-aa06-a4c1bfb9dc58%2Fskills%20(3).svg?1535017774321';
+var BLACK_ICON = 'https://cdn.glitch.com/b4e956a2-3002-4a55-aa06-a4c1bfb9dc58%2Fskills%20(4).svg?1535017831898';
+var GRAY_ICON = 'https://cdn.glitch.com/b4e956a2-3002-4a55-aa06-a4c1bfb9dc58%2Fround%20icon%20grey.svg?1535017465732';
+var CAPABILITY_ICON = 'https://cdn.glitch.com/b4e956a2-3002-4a55-aa06-a4c1bfb9dc58%2Fskills.svg?1535017439172';
 
 // When board buttons is clicked
 var onBtnClick = function (t, opts) {
@@ -70,8 +70,8 @@ TrelloPowerUp.initialize({
   // Start adding handlers for your capabilities here!
   'card-buttons': function(t, options) {
 		return [{
-     		icon: BLACK_ROCKET_ICON,
-	 		  text: 'Growth Plan capabilities',
+     		icon: BLACK_ICON,
+	 		  text: 'Growth Areas',
 	      callback: cardButtonCallback
 	 	}];
 	 },
@@ -82,7 +82,7 @@ TrelloPowerUp.initialize({
         dark: WHITE_ICON,
         light: BLACK_ICON
       },
-      text: 'Boardwalk',
+      text: 'Growth Plan',
       callback: onBtnClick,
       condition: 'edit'
     }];
