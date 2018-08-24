@@ -22,16 +22,39 @@ var onBtnClick = function (t, opts) {
     return t.popup({
       title: 'Connect Tasks to Growth Plan',
       url: './configure-powerup.html',
-      height: 175,
+      height: 200,
     });
   }
 };
 
+
 // When button on card is clicked
 var cardButtonCallback = function(t){
   
+  
     // TODO: fetch items with name + URL to its corresponding card
     var items = function(){
+                      console.log("button clicked");
+
+      t.card('id')
+      .then(function(card){
+        $.ajax({
+          url: `/capability/${card.id}?` + $.param({ token: t }),
+          type: 'GET',
+          success: function(){
+            return t.set('card', 'shared', { idCard: null, time: null, unixTime: null })
+            .then(function(){
+              console.log(JSON.stringify(t.all, null, 2));
+              t.closePopup();
+            });
+          },
+          error: function(err){ console.error('Error deleting from server: ' + JSON.stringify(err)); }
+        });
+      })
+      .catch(function(err){
+        console.error('Error fetching connected board cards');
+        console.error(err);
+      });
 
       return {
         text: '',

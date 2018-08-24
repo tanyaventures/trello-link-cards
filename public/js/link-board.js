@@ -2,46 +2,68 @@
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
+var token = null;
 
 var linkBtn = document.getElementById('link');
 
-var TRELLO_BOARD_QUERY = 'https://api.trello.com/1/boards';
+// var TRELLO_BOARD_QUERY = 'https://api.trello.com/1/boards';
 
-linkBtn.addEventListener("click", function() {
+document.getElementById('link').addEventListener('click', function(){
   var input = document.getElementById('url');
   var url = input.value;
-  if (url){
-    storeBoardID();
-  }
-  else {
-    // return error
-  }
+  var array = url.split("/");
+  
+  // t.getAll()
+  // .then(function (data) {
+  //   console.log(JSON.stringify(data, null, 2));
+  // });
+  
+  // t.get('member', 'private', 'token')
+  // .then(function(storedToken) {
+  //   console.log(token);
+  //   token = storedToken;
+  // });
+
+
+  
+  // To store fetched data 
+  var boardId = array[4];
+  var nameBoard = '';
+  
+  var data = null;
+  var connectedBoardName = "";
+
+      
+  t.board('id', 'name')
+  .then(function(board){
+    $.get(`/link-board/${boardId}`, function(res) {
+      return t.set('board', 'shared', { parentBoardName: board['name'], idBoard: boardId, boardName: connectedBoardName})
+      .then(function(){
+        return t.getAll()
+        .then(function (data) {
+          console.log(JSON.stringify(data, null, 2));
+
+          document.getElementById("text").innerHTML = 'Congratulations! 🎉' + board['name'] + " is connected to " + connectedBoardName
+        });
+      });
+    });
+  })
+  .catch(function(err){
+    console.error(err);
+  });
 });
-
-// function storeBoardID(url){
   
-//   // Extract ID from URL 
-//   var array = url.split("/");
-//   var trello_id = array[4];
-//   console.log(trello_id);
+//   var trello_api = "https://api.trello.com/1/boards/" + boardId + "?key=98428d0d95a342312fcbe106220898f9&token=a91b0ece0a71636f0dcc452b223b8a474835e4e82b9e612bf8ea76256c67a771";
 
-//   var data = null;
-
-//   var xhr = new XMLHttpRequest();
-
-//   xhr.addEventListener("readystatechange", function () {
-//     if (this.readyState === this.DONE) {
-//     console.log(this.responseText);
-//     }
-//   });
-
-//   var fetchURL = TRELLO_BOARD_QUERY + trello_id + '&key=' + process.env.TRELLO_API_KEY
-//     + '&token=' + process.env.TRELLO_TOKEN;
-  
-//   xhr.open("GET", fetchURL);
+//   xhr.open("GET", 
+//            trello_api);
 
 //   xhr.send(data);
   
-// }
+                                                 
+                                                
+
+
+
 
 
